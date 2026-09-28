@@ -1,0 +1,186 @@
+<?xml version="1.0" ?>
+<sdf version="1.6">
+  <world name="tabletop">
+    <physics name="1ms" type="ignored">
+      <max_step_size>0.001</max_step_size>
+      <real_time_factor>1.0</real_time_factor>
+    </physics>
+    <plugin
+      filename="ignition-gazebo-physics-system"
+      name="gz::sim::systems::Physics">
+    </plugin>
+    <plugin
+      filename="ignition-gazebo-user-commands-system"
+      name="gz::sim::systems::UserCommands">
+    </plugin>
+    <plugin
+      filename="ignition-gazebo-scene-broadcaster-system"
+      name="gz::sim::systems::SceneBroadcaster">
+    </plugin>
+    <plugin
+      filename="ignition-gazebo-contact-system"
+      name="gz::sim::systems::Contact">
+    </plugin>
+
+    <light type="directional" name="sun">
+      <cast_shadows>true</cast_shadows>
+      <pose>0 0 10 0 0 0</pose>
+      <diffuse>0.8 0.8 0.8 1</diffuse>
+      <specular>0.2 0.2 0.2 1</specular>
+      <attenuation>
+        <range>1000</range>
+        <constant>0.9</constant>
+        <linear>0.01</linear>
+        <quadratic>0.001</quadratic>
+      </attenuation>
+      <direction>-0.5 0.1 -0.9</direction>
+    </light>
+
+    <model name="ground_plane">
+      <static>true</static>
+      <link name="link">
+        <collision name="collision">
+          <geometry>
+            <plane>
+              <normal>0 0 1</normal>
+              <size>100 100</size>
+            </plane>
+          </geometry>
+        </collision>
+        <visual name="visual">
+          <geometry>
+            <plane>
+              <normal>0 0 1</normal>
+              <size>100 100</size>
+            </plane>
+          </geometry>
+          <material>
+            <ambient>0.8 0.8 0.8 1</ambient>
+            <diffuse>0.8 0.8 0.8 1</diffuse>
+            <specular>0.8 0.8 0.8 1</specular>
+          </material>
+        </visual>
+      </link>
+    </model>
+
+    <!-- Work table: top surface at z = 0.20 m, within the UR3's reach -->
+    <model name="table">
+      <static>true</static>
+      <pose>0.35 0 0.10 0 0 0</pose>
+      <link name="link">
+        <collision name="collision">
+          <geometry>
+            <box><size>0.5 0.8 0.20</size></box>
+          </geometry>
+        </collision>
+        <visual name="visual">
+          <geometry>
+            <box><size>0.5 0.8 0.20</size></box>
+          </geometry>
+          <material>
+            <ambient>0.55 0.4 0.28 1</ambient>
+            <diffuse>0.55 0.4 0.28 1</diffuse>
+          </material>
+        </visual>
+      </link>
+    </model>
+
+    <!-- Objects: red_cube / yellow_cube / blue_cube, 4 cm cubes resting on the table -->
+    <model name="red_cube">
+      <static>true</static>
+      <pose>0.35 0.18 0.22 0 0 0</pose>
+      <link name="link">
+        <collision name="collision">
+          <geometry><box><size>0.04 0.04 0.04</size></box></geometry>
+        </collision>
+        <visual name="visual">
+          <geometry><box><size>0.04 0.04 0.04</size></box></geometry>
+          <material>
+            <ambient>0.8 0.05 0.05 1</ambient>
+            <diffuse>0.8 0.05 0.05 1</diffuse>
+          </material>
+        </visual>
+      </link>
+    </model>
+
+    <model name="yellow_cube">
+      <static>true</static>
+      <pose>0.35 0.0 0.22 0 0 0</pose>
+      <link name="link">
+        <collision name="collision">
+          <geometry><box><size>0.04 0.04 0.04</size></box></geometry>
+        </collision>
+        <visual name="visual">
+          <geometry><box><size>0.04 0.04 0.04</size></box></geometry>
+          <material>
+            <ambient>0.85 0.75 0.05 1</ambient>
+            <diffuse>0.85 0.75 0.05 1</diffuse>
+          </material>
+        </visual>
+      </link>
+    </model>
+
+    <model name="blue_cube">
+      <static>true</static>
+      <pose>0.35 -0.18 0.22 0 0 0</pose>
+      <link name="link">
+        <collision name="collision">
+          <geometry><box><size>0.04 0.04 0.04</size></box></geometry>
+        </collision>
+        <visual name="visual">
+          <geometry><box><size>0.04 0.04 0.04</size></box></geometry>
+          <material>
+            <ambient>0.05 0.15 0.8 1</ambient>
+            <diffuse>0.05 0.15 0.8 1</diffuse>
+          </material>
+        </visual>
+      </link>
+    </model>
+
+    <!-- Placement zones (flat markers on the table). Per-student mapping
+         (student_id 20020675 -> P = 75 mod 6 = 3 -> A=Yellow, B=Blue, C=Red)
+         is shown by tinting each marker with its personal target color. -->
+    <model name="zone_a_marker">
+      <static>true</static>
+      <pose>0.20 0.18 0.201 0 0 0</pose>
+      <link name="link">
+        <visual name="visual">
+          <geometry><box><size>0.08 0.08 0.002</size></box></geometry>
+          <material>
+            <ambient>0.85 0.75 0.4 1</ambient>
+            <diffuse>0.85 0.75 0.4 1</diffuse>
+          </material>
+        </visual>
+      </link>
+    </model>
+
+    <model name="zone_b_marker">
+      <static>true</static>
+      <pose>0.20 0.0 0.201 0 0 0</pose>
+      <link name="link">
+        <visual name="visual">
+          <geometry><box><size>0.08 0.08 0.002</size></box></geometry>
+          <material>
+            <ambient>0.4 0.5 0.85 1</ambient>
+            <diffuse>0.4 0.5 0.85 1</diffuse>
+          </material>
+        </visual>
+      </link>
+    </model>
+
+    <model name="zone_c_marker">
+      <static>true</static>
+      <pose>0.20 -0.18 0.201 0 0 0</pose>
+      <link name="link">
+        <visual name="visual">
+          <geometry><box><size>0.08 0.08 0.002</size></box></geometry>
+          <material>
+            <ambient>0.85 0.45 0.4 1</ambient>
+            <diffuse>0.85 0.45 0.4 1</diffuse>
+          </material>
+        </visual>
+      </link>
+    </model>
+
+  </world>
+</sdf>

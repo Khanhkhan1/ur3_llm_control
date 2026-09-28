@@ -1,0 +1,10 @@
+task_runner:
+  ros__parameters:
+    # 9Router (https://github.com/decolua/9router) running locally, exposing
+    # an OpenAI-compatible endpoint. Get your own key from the local
+    # dashboard -> Endpoint & Key page. Prefer exporting it as the
+    # NINEROUTER_API_KEY environment variable (task_runner.py checks that
+    # first) rather than committing it here.
+    llm_base_url: "http://127.0.0.1:20128/v1"
+    llm_model: "oc/muse-spark-1.3-contributor-free"
+    llm_api_key: ""
