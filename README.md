@@ -84,7 +84,7 @@ vào ô A."`) — the LLM decides the skills, not string matching.
 
 ## Result
 
-- Video demo: `<Google Drive link — public>`
+- Video demo: https://drive.google.com/file/d/1fpaq9uroJ2O7EnVOsQc4s3QKnMg4Tfib/view?usp=sharing
 - GitHub repo: https://github.com/Khanhkhan1/ur3_llm_control
 
 ![Startup](docs/startup.png)
